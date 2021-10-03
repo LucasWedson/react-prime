@@ -5,5 +5,5 @@ export const Container = styled.View`
     background-color: #191a30;
 `;
 
-export const Name = styled.Text``;
+export const ListMovies= styled.FlatList``;
 

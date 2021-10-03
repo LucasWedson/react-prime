@@ -1,11 +1,14 @@
 
 
 import React, {useState, useEffect} from 'react';
- import { Container, Name} from './styles';
+ import { Container, Name, ListMovies} from './styles';
 
  import api,{ key } from '../../services/api';
 
  import { useNavigation, useRoute } from '@react-navigation/native';
+
+ import SearchItem from '../../components/SearchItem';
+
 
  function Search(){
     const navigation = useNavigation();
@@ -47,6 +50,10 @@ import React, {useState, useEffect} from 'react';
         }
     },[])
 
+    function navigateDetailsPage(item){
+        navigation.navigate('Detail', {id: item.id})
+    }
+
     if(loading){
 
         return(
@@ -56,7 +63,18 @@ import React, {useState, useEffect} from 'react';
 
      return(
         <Container>
-            <Name>Teste procurando</Name>
+            <ListMovies
+                data={movie}
+                showsVerticalScrollIndicador={false}
+                keyExtractor={(item)=> String(item.id)}
+                renderItem={({item})=> 
+                <SearchItem
+                data={item}
+                navigatePage={ ()=>
+                navigateDetailsPage(item)}
+                />}
+
+            />
         </Container>
 
      )
